@@ -19,7 +19,7 @@ const Preview = ({
             </div>
             <div className=" bg-slate-800">
                 <input
-                    type="text"
+                    type="text"   
                     className="m-1"
                     disabled
                     placeholder="https://yoursite/vcard/username"

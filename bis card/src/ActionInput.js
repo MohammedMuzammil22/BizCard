@@ -35,7 +35,7 @@ const ActionInput = ({ iconLabel, text, setText }) => {
           placeholder={`Enter the url`}
           name="inputField"
           id="in"
-          className="border"
+          className=" bg-black text-white"
           onChange={handleChange}
         />
       </div>

@@ -652,6 +652,7 @@ import {FaTelegramPlane} from "react-icons/fa"
 import {FaWhatsapp} from "react-icons/fa"
 import {BsFillCalendarDateFill} from "react-icons/bs" 
 import FeaturedContent from './components/FeaturedContent';
+import AddMedia from './mail/AddMedia';
 
 
 
@@ -733,9 +734,14 @@ function App() {
 
 
   // const position = 0
+  // const [fContent,setFContent] = useState(
+  //     [{id:1,text:[{position:position,text:""}],media:[{position:position,mediaLink:""}], product:[{position:position,image:"",productTitle:"",productDescription:"",productPrice:"",productButtonLink:"",productButtonLabel:"",}], embedMedia:[{position:position,embedCode:""}], position:[] }]
+  //   ) 
   const [fContent,setFContent] = useState(
-      [{id:1,text:[{position:position,text:""}],media:[{position:position,mediaLink:""}], product:[{position:position,image:"",productTitle:"",productDescription:"",productPrice:"",productButtonLink:"",productButtonLabel:"",}], embedMedia:[{position:position,embedCode:""}], position:[] }]
-    )
+      [{id:1,
+        title:"Section Title",
+        orderOfRender: []}]
+    ) 
     // position:position,type:""
   console.log(fContent);
    
@@ -748,7 +754,7 @@ function App() {
   //     // console.log(e.target.files[0]);
   //     // console.log(img);
   // }
-
+    
   function handleImageUpload(event){
     const file = event.target.files[0];
   }
@@ -791,7 +797,10 @@ function App() {
   };
 
   const addFeaturedContent = () =>{
-    const newFeaturedContent = {id:fContent.length+1,text:[{position:null,text:""}],media:[{position:null,mediaLink:""}], product:[{position:null,image:"",productTitle:"",productDescription:"",productPrice:"",productButtonLink:"",productButtonLabel:"",}], embedMedia:[{position:null,embedCode:""}], position:[{position:null,type:""}] }
+    // const newFeaturedContent = {id:fContent.length+1,text:[{position:null,text:""}],media:[{position:null,mediaLink:""}], product:[{position:null,image:"",productTitle:"",productDescription:"",productPrice:"",productButtonLink:"",productButtonLabel:"",}], embedMedia:[{position:null,embedCode:""}], position:[{position:null,type:""}] }
+    const newFeaturedContent = {id:fContent.length+1,
+      title:"Section Title",
+      orderOfRender: []}
 
     setFContent([...fContent, newFeaturedContent ])
     // {console.log("... "+fContent)}
@@ -808,7 +817,7 @@ function App() {
 
 
   return (
-    <div className='App bg-gray-400'>
+    <div className='App  bg-gray-900 '>
       {/* <Header
         img={img}
         setImg={setImg}
@@ -822,10 +831,10 @@ function App() {
       {/* <Content/> */}
       {/* <label htmlFor="inputField">firstName</label>
       <input  value={firstName} type="text" name="inputField"  onChange={(e)=>(setFirstName(e.target.value))} /> */}
-      <form >
+      {/* <form >   
         <input type="file" onChange={handleImageUpload} style={{ display: "none"}} />
         <button type='submit' className='border bg-red-400'>upload img</button>
-      </form>
+      </form> */}
 
       <div className="flex flex-row justify-around py-4 ">
 
@@ -843,8 +852,8 @@ function App() {
           
 
           
-          <hr />
-          <h1>Primary action</h1>
+          <hr className='my-2 '/>
+          <h1 className='text-white '>Primary action</h1>
 
           <div>
             {primaryPreviewData.map((data) => (
@@ -865,10 +874,10 @@ function App() {
             
             </div>
 
-          <div className='bg-yellow-600  p-4 space-x-2 space-y-2  flex flex-wrap justify-between '>
+          <div className='bg-gray-800  p-4 space-x-2 space-y-2  flex flex-wrap justify-between '>
                 {primaryAction.map((icon)=>(icon.isVisible)?(
                 <div className='w-[48%] '>
-                  <button className=' border w-[100%] h-8  flex flex-row   items-center' onClick={()=>handleAddIcon(icon.id,icon,true)}>
+                  <button className='  w-[100%] h-8  flex flex-row   items-center bg-gray-700' onClick={()=>handleAddIcon(icon.id,icon,true)}>
                     <div className='pl-4'>{icon.icon}</div>
                     <div className=' flex justify-start px-4'>{icon.name}</div>
                     </button>
@@ -884,8 +893,6 @@ function App() {
           
           
             <div>
-              
-          
             {/* {previewData.map((data)=>          
               <ActionInput 
                 key={data.id}
@@ -914,12 +921,12 @@ function App() {
             
             </div>
 
-          <div className='bg-yellow-600  p-4 space-x-2 space-y-2  flex flex-wrap justify-between '>
+          <div className='bg-gray-800 p-4 space-x-2 space-y-2  flex flex-wrap justify-between '>
                 {secondaryIconData.map((icon)=>(icon.isVisible)?(
                 <div className='w-[48%] '>
-                  <button className=' border w-[100%] h-8   ' onClick={()=>handleAddIcon(icon.id,icon,false)}>
-                    <div>{icon.icon}</div>
-                    <div>{icon.name}</div>
+                  <button className='  w-[100%] h-8  flex flex-row   items-center bg-gray-700' onClick={()=>handleAddIcon(icon.id,icon,false)}>
+                    <div className='pl-4'>{icon.icon}</div>
+                    <div className=' flex justify-start px-4'>{icon.name}</div>
                     </button>
                 </div>):null
                 )}
@@ -927,11 +934,16 @@ function App() {
 
             <h1>Featured content</h1>
 
-            {fContent.map((content)=><div className='my-4'> <FeaturedContent key={content.id} comp={comp} orderOfrender={content.position} setFContent={setFContent} id={content.id} fContent={fContent} content={content}/></div>)}
+            {/* {fContent.map((content)=><div className='my-4'> <FeaturedContent key={content.id} comp={comp} orderOfrender={content.position} setFContent={setFContent} id={content.id} fContent={fContent} content={content}/></div>)} */}
+            {fContent.map((content,index)=><div className='my-4'> <FeaturedContent key={index}   setFContent={setFContent} id={index+1} fContent={fContent} content={content} /></div>)}
+      
+            {/* {fContent.forEach((e) => console.log("Fcontent:", e))}  */}
+
             <div className='flex m-2 ml-0'>
-              <button className='bg-slate-500 h-8 w-8' onClick={()=>addFeaturedContent()}>+</button>
+              <button className='bg-gray-700 h-8 w-8' onClick={()=>addFeaturedContent()}>+</button>
               <h1 className='m-1'>Add section</h1>
             </div>
+            {/* {fContent.map((e)=>console.log("fcontent : "+e))} */}
 
 
 
@@ -954,6 +966,7 @@ function App() {
           
           />
         </div>
+        {/* <AddMedia/> */}
 
       </div>
 

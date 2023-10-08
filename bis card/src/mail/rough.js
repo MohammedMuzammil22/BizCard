@@ -102,3 +102,15 @@ const FeaturedContent = ({ comp, orderOfrender, setFContent, id, fContent, conte
 }
 
 export default FeaturedContent;
+
+<div className='bg-gray-800  p-4 space-x-2 space-y-2  flex flex-wrap justify-between '>
+                {primaryAction.map((icon)=>(icon.isVisible)?(
+                <div className='w-[48%] '>
+                  <button className='  w-[100%] h-8  flex flex-row   items-center bg-gray-700' onClick={()=>handleAddIcon(icon.id,icon,true)}>
+                    <div className='pl-4'>{icon.icon}</div>
+                    <div className=' flex justify-start px-4'>{icon.name}</div>
+                    </button>
+                </div>):null
+                
+                )}
+            </div>
